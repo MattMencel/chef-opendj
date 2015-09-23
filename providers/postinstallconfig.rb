@@ -69,14 +69,6 @@ action :run do
     EOH
   end
 
-  node['opendj']['schema_files'].each do |schema|
-    cookbook_file "#{node[]'opendj']['home']}/config/schema/#{schema}" do
-      cookbook node['opendj']['cookbook_source']
-      source "schema/#{schema}"
-      mode '0644'
-    end
-  end
-  
   service 'opendj' do
     action [:start, :enable]
   end
