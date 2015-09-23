@@ -24,6 +24,10 @@ action :run do
     end
     cacerts += "#{cert} "
   end
+
+  chain = ''
+  chain = '-chain \ -CAfile cacerts.pem \ ' unless cacerts.empty?
+
   script 'create_keystore' do
     interpreter 'bash'
     cwd "#{node['opendj']['home']}/certs"
@@ -33,8 +37,7 @@ action :run do
       openssl pkcs12 -export \
        -inkey #{node['opendj']['ssl_key']} \
        -in #{node['opendj']['ssl_cert']} \
-       -chain \
-       -CAfile cacerts.pem \
+       #{chain}
        -password pass:#{node['opendj']['keystore_pass']} \
        -out keystore.p12
     EOH
