@@ -36,8 +36,7 @@ action :run do
       cat #{cacerts} > cacerts.pem
       openssl pkcs12 -export \
        -inkey #{node['opendj']['ssl_key']} \
-       -in #{node['opendj']['ssl_cert']} \
-       #{chain}
+       -in #{node['opendj']['ssl_cert']} #{chain} \
        -password pass:#{node['opendj']['keystore_pass']} \
        -out keystore.p12
     EOH
