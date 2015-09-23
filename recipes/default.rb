@@ -9,7 +9,7 @@ end
 
 cookbook_file "#{node['opendj']['installer_archive']}" do
   cookbook node['opendj']['cookbook_source']
-  mode "0644"
+  mode '0644'
 end
 
 user "#{node['opendj']['user']}" do
