@@ -26,7 +26,7 @@ action :run do
   end
 
   chain = ''
-  chain = '-chain \ -CAfile cacerts.pem \ ' unless cacerts.empty?
+  chain = '-chain -CAfile cacerts.pem ' unless cacerts.empty?
 
   script 'create_keystore' do
     interpreter 'bash'

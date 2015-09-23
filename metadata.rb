@@ -3,7 +3,7 @@ maintainer 'Elliot Kendall'
 maintainer_email 'elliot.kendall@ucsf.edu'
 license 'Apache 2.0'
 description 'Installs OpenDJ LDAP server'
-version '0.1.5'
+version '0.1.6'
 
 recipe 'opendj', 'Installs OpenDJ LDAP server'
 
