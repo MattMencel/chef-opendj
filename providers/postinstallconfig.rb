@@ -5,10 +5,12 @@ action :run do
   end
 
   cookbook_file "#{node['opendj']['home']}/certs/#{node['opendj']['ssl_cert']}" do
+    cookbook node['opendj']['cookbook_source']
     owner "#{node['opendj']['user']}"
     mode '0644'
   end
   cookbook_file "#{node['opendj']['home']}/certs/#{node['opendj']['ssl_key']}" do
+    cookbook node['opendj']['cookbook_source']
     owner "#{node['opendj']['user']}"
     mode '0644'
   end
@@ -16,6 +18,7 @@ action :run do
   cacerts = ''
   node['opendj']['ssl_chain'].each do |cert|
     cookbook_file "#{node['opendj']['home']}/certs/#{cert}" do
+      cookbook node['opendj']['cookbook_source']
       owner "#{node['opendj']['user']}"
       mode '0644'
     end

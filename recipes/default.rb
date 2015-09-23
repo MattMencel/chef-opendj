@@ -35,6 +35,7 @@ opendj_postinstallconfig 'default' do
 end
 
 cookbook_file "#{node['opendj']['home']}/dsml.war" do
+  cookbook node['opendj']['cookbook_source']
   source "#{node['opendj']['dsml_war']}"
   mode '0644'
 end
