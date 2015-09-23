@@ -92,20 +92,22 @@ action :run do
    --bindPassword #{node['opendj']['dir_manager_password']}
   EOH
 
-  node['opendj']['ldif_files'].each do |ldif|
-    cookbook_file "#{node['opendj']['home']}/ldif/#{ldif}" do
-      cookbook node['opendj']['cookbook_source']
-      mode '0644'
-    end
-    script "import_ldif_#{ldif}" do
-      interpreter 'bash'
-      user "#{node['opendj']['user']}"
-      code <<-EOH
-        #{node['opendj']['home']}/bin/ldapmodify \
-         #{commonArguments} \
-         --continueOnError --useSSL --defaultAdd \
-         --filename #{node['opendj']['home']}/ldif/#{ldif}
-      EOH
+  unless node['opendj']['ldif_files'].empty?
+    node['opendj']['ldif_files'].each do |ldif|
+      cookbook_file "#{node['opendj']['home']}/ldif/#{ldif}" do
+        cookbook node['opendj']['cookbook_source']
+        mode '0644'
+      end
+      script "import_ldif_#{ldif}" do
+        interpreter 'bash'
+        user "#{node['opendj']['user']}"
+        code <<-EOH
+          #{node['opendj']['home']}/bin/ldapmodify \
+           #{commonArguments} \
+           --continueOnError --useSSL --defaultAdd \
+           --filename #{node['opendj']['home']}/ldif/#{ldif}
+        EOH
+      end
     end
   end
 
