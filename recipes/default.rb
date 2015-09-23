@@ -8,7 +8,8 @@ directory "#{node['opendj']['install_dir']}" do
 end
 
 cookbook_file "#{node['opendj']['installer_archive']}" do
-  mode '0644'
+  cookbook node['opendj']['cookbook_source']
+  mode "0644"
 end
 
 user "#{node['opendj']['user']}" do
