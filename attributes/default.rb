@@ -33,6 +33,7 @@ default['opendj']['indexes'] = []
 default['opendj']['backup_ldif'] = nil
 default['opendj']['properties'] = {}
 default['opendj']['ldif_files'] = []
+default['opendj']['schema_files'] = []
 default['opendj']['replication']['host_search'] = 'role:sample-opendj-role'
 default['opendj']['replication']['port'] = default['opendj']['ssl_port']
 default['opendj']['replication']['uid'] = 'replication-user'

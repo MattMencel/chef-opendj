@@ -29,6 +29,15 @@ script 'unpack_archive' do
   not_if "test -d #{node['opendj']['home']}"
 end
 
+
+node['opendj']['schema_files'].each do |schema|
+  cookbook_file "#{node[]'opendj']['home']}/config/schema/#{schema}" do
+    cookbook node['opendj']['cookbook_source']
+    source "schema/#{schema}"
+    mode '0644'
+  end
+end
+  
 opendj_postinstallconfig 'default' do
   action :nothing
   subscribes :run, resources('script[unpack_archive]'), :immediately
