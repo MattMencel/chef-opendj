@@ -94,6 +94,7 @@ action :run do
 
   node['opendj']['ldif_files'].each do |ldif|
     cookbook_file "#{node['opendj']['home']}/ldif/#{ldif}" do
+      cookbook node['opendj']['cookbook_source']
       mode '0644'
     end
     script "import_ldif_#{ldif}" do
@@ -215,6 +216,7 @@ action :run do
 
   unless node['opendj']['backup_ldif'].nil?
     cookbook_file "#{node['opendj']['home']}/#{node['opendj']['backup_ldif']}" do
+      cookbook node['opendj']['cookbook_source']
       owner "#{node['opendj']['user']}"
       mode '0644'
     end
