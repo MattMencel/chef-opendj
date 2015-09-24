@@ -1,3 +1,6 @@
+node.default['sysctl']['params']['fs']['file-max'] = '204252'
+include_recipe 'sysctl::apply'
+
 # Make sure we have what we need to unpack archives
 package 'unzip' do
   action :install
@@ -41,6 +44,18 @@ end
 opendj_postinstallconfig 'default' do
   action :nothing
   subscribes :run, resources('script[unpack_archive]'), :immediately
+end
+
+set_limit 'opendj' do
+  type 'soft'
+  item 'nofile'
+  value 65536
+end
+
+set_limit 'opendj' do
+  type 'hard'
+  item 'nofile'
+  value 131072
 end
 
 cookbook_file "#{node['opendj']['home']}/dsml.war" do

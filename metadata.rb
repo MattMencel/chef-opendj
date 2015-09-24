@@ -10,3 +10,6 @@ recipe 'opendj', 'Installs OpenDJ LDAP server'
 %w( redhat centos fedora ubuntu debian ).each do |os|
   supports os
 end
+
+depends 'limits', '~> 1.0.0'
+depends 'sysctl', '~> 0.6.0'
