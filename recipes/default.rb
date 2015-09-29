@@ -1,5 +1,6 @@
 node.default['sysctl']['params']['fs']['file-max'] = '204252'
 include_recipe 'sysctl::apply'
+include_recipe 'java'
 
 # Make sure we have what we need to unpack archives
 package 'unzip' do

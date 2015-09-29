@@ -2,6 +2,7 @@
 # Cookbook Name:: opendj
 # Attributes:: default
 #
+default['java']['jdk_version'] = 7
 
 default['opendj']['version'] = '2.6.0'
 default['opendj']['install_dir'] = '/opt'
