@@ -36,6 +36,7 @@ end
 node['opendj']['schema_files'].each do |schema|
   cookbook_file "#{node['opendj']['home']}/config/schema/#{schema}" do
     cookbook node['opendj']['cookbook_source']
+    user 'opendj'
     source "schema/#{schema}"
     mode '0644'
   end
