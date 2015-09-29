@@ -48,6 +48,7 @@ action :run do
     user "#{node['opendj']['user']}"
     code <<-EOH
       ./setup --cli --no-prompt --addBaseEntry --enableStartTLS \
+        --acceptLicense \
         --doNotStart \
         --usePkcs12Keystore #{node['opendj']['home']}/certs/keystore.p12 \
         --keyStorePassword #{node['opendj']['keystore_pass']} \
